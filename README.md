@@ -1,2 +1,19 @@
 # mirasearch
 Código fuente completo para un motor de búsqueda en la Red Tor con python3.10 y django
+
+python3 venv -m venv
+
+cd venv/Scripts
+
+activate
+
+pip install -r requirements.txt
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py runserver
+
+
+
