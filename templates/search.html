@@ -1,0 +1,222 @@
+<style>
+    body {
+    font-size: 10pt;
+    font-family: arial, sans-serif;
+    }
+    a {
+    text-decoration: none;
+    }
+    
+
+    button {
+    font-weight: bold;
+    font-family: arial;
+    margin-bottom: 0;
+    }
+
+    .top-toolbar nav {
+    float:right;
+    margin: 7px 21px;
+    }
+    
+    .top-toolbar nav a {
+    margin: 1px 2px;
+    color: #404040;
+    }
+    
+    .top-toolbar nav a:hover {
+    color: #111111;
+    }
+    
+    .top-toolbar nav button:hover {
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    }
+    
+
+    .search {
+  
+    text-align: center;
+    clear: both;
+    margin: 11% 0 0 0;
+    }
+    
+    .logo {
+    max-width: 21%;
+    margin: 0 auto;
+    }
+    
+    .search img {
+    margin-bottom: 3%;
+    max-width: 100%;
+    }
+    
+    .search input {
+    
+    width: 570px;
+    border: 1px solid #D8D8D8;
+    padding: 5px;
+    font-size: 11pt;
+    }
+
+
+    
+    .search-bar {
+    max-width: 80%;
+    }
+    
+    .search input {
+        box-sizing: border-box;
+        color: #000;
+        font-size: 1.6em;
+        font-family: 'robotolight', Roboto, Helvetica, sans-serif;
+        line-height: 1.8em;
+        padding-left: 0.5em;
+        text-align: left;
+        min-width: 12em;
+        border: 0;
+        border-top: 2px solid rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 0.5em rgb(0 0 0 / 90%);
+    }
+    
+  
+
+    .search button {
+        box-sizing: border-box;
+        font-family: 'robotolight', Roboto, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #000;
+        color: #fff;
+        border: 3px solid #000;
+        border-top-width: 3px;
+        font-size: 1.6em;
+        line-height: 1.8em;
+        text-align: right;
+        padding: 0 0.8em;
+    }
+    
+    
+    h1 {
+        font-family: 'alfphabetiv', 'Alfphabet IV', 'Alfphabet', 'Helvetica', sans-serif;
+        font-size: 6.2em;
+        color:  #000000 ;
+        font-weight: 10000;
+    }
+   
+    button[type="submit"] {
+        margin-bottom: 40px;
+        cursor: pointer;
+    }
+
+    
+    .gif-image {
+        position: absolute;
+        top: 20px;
+        left: 50px;
+        width: 300px;
+        height: 300px;
+       
+      }
+
+      .gif-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: white;
+        z-index: 1;
+      }
+
+    
+      .gif-image2 {
+        position: absolute;
+        top: 50px;
+        left: 1132px;
+        width: 350px;
+        height: 480px;
+      }
+
+    
+
+    #boton-principal {
+        width: 100%; 
+        height: auto;         
+        display: block; 
+        background-color: black;
+        color: #FFFFFF;
+        font-size: 85px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #image {
+        max-width: 60%;
+        max-height: 110%;
+        float: left;
+      }
+      
+    .top-toolbar {
+        margin-top: 0;
+     }
+  
+    </style>
+     <div class="top-toolbar">
+    <nav>
+    </nav>
+    </div> 
+    <div class="search">
+    <div class="logo">
+    <button id="boton-principal" onclick="location.href='/'">MI<span id="ra-span" style="color: red;">RA</span></button>
+    </div>
+    <div class="gif-image">
+        
+        <span class="gif-text">Links onion</span>
+        <a href="https://thehiddenwiki.org/" target="_blank"><img src="https://i.gifer.com/DO5.gif"></a>
+    </div>
+    <div class="gif-image2">
+        <span></span>
+        <a href="https://www.torproject.org/" target="_blank"><img src="https://1000marcas.net/wp-content/uploads/2021/06/Tor-Logo.jpg?fbclid=IwAR3bRj6xmaNVSqBhRS_ls73oYtHidUIIo25h329oXUNjqIYOXtOaMShsM-g"></a>
+    </div>
+    <form method="POST" action="search">
+    {% csrf_token %}
+    <input class="search-bar" type="text" name="search" autofocus x-webkit-speech/>
+    <div class="search-nav">
+    <div class="search-button">
+        <br>
+    <a href="#"><button type="submit">Buscar</button></a>
+    </form>
+    </div>
+    </div>
+    </div>
+    <hr>
+    {% if final_result %}
+    <b style="font-size: 20px; padding-left: 50px; padding-right: 50px; color: #646464;">Resultados: </b>
+    <br style="margin-bottom: 20px;">
+    <br>
+    <br>
+    {% for result in final_result %}
+   
+    <div style="display: flex; align-items: center; padding-left: 50px; padding-right: 50px;">
+        <div id="image" style="margin-right: 20px;">
+          <img src="https://www.shareicon.net/data/128x128/2015/09/18/102903_tor_512x512.png" alt="">
+        </div>
+        <div>
+          <h3 style="color: blue;"><a href="{% url 'onion_redirect' %}?redirect_url={{ result.1 }}&search_term={{ search }}" target="_blank">{{ result.0 }} </a></h3>
+          <h3 style="color: green;">{{ result.1 }}</h3>
+          <h3>{{ result.2 }}</h3>
+        </div>
+      </div>      
+    <br><br>
+    {% endfor %}
+    {% endif %}
+    <div class="footer">
+    <footer class="bottom-toolbar">
+    <nav class="footer-left">
+    </nav>
+    <nav class="footer-right">
+    </nav>
+    </footer>
+    </div>
