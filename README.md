@@ -18,6 +18,6 @@ python manage.py migrate
 python manage.py runserver
 
 <p align="center">
-  <img src="miresearch.JPG">
+  <img src="mirasearch.JPG">
 </p>
 
